@@ -94,6 +94,10 @@ class EntityGraphPersisterTest {
         // Then
         Order actualOrder = doInTransaction(() -> entityManager.find(Order.class, order.getId()));
         assertThat(actualOrder).isNotNull();
+
+        assertThat(actualOrder.getOrderItems())
+                .isNotEmpty()
+                .allSatisfy(item -> assertThat(item).isNotNull());
     }
 
     @Test
